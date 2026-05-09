@@ -45,90 +45,70 @@ class _MatakuliahListScreenState extends State<MatakuliahListScreen> {
       appBar: AppBar(title: const Text('Data Matakuliah')),
       body: Column(
         children: [
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
-            decoration: const BoxDecoration(
-              color: blue,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(24),
-                bottomRight: Radius.circular(24),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: const Color(0xFFE0E5EE)),
+                borderRadius: BorderRadius.circular(12),
               ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      width: 48,
-                      height: 48,
-                      decoration: BoxDecoration(
-                        color: yellow,
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      child: const Icon(
-                        Icons.school,
-                        color: darkText,
-                        size: 28,
-                      ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 44,
+                    height: 44,
+                    decoration: BoxDecoration(
+                      color: blue,
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    const SizedBox(width: 14),
-                    const Expanded(
-                      child: Text(
-                        'Kelola Data Kuliah',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 21,
-                          fontWeight: FontWeight.w800,
+                    child: const Icon(Icons.school, color: Colors.white),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Kelola Data Kuliah',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: darkText,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w800,
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 14),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 8,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.14),
-                    borderRadius: BorderRadius.circular(99),
-                    border: Border.all(
-                      color: Colors.white.withValues(alpha: 0.22),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(
-                        Icons.library_books,
-                        color: Colors.white,
-                        size: 16,
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        '${_matakuliah.length} matakuliah tersimpan',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w700,
+                        const SizedBox(height: 4),
+                        Text(
+                          '${_matakuliah.length} matakuliah tersimpan',
+                          style: TextStyle(
+                            color: Colors.black.withValues(alpha: 0.58),
+                            fontSize: 13,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  Container(
+                    width: 8,
+                    height: 44,
+                    decoration: BoxDecoration(
+                      color: yellow,
+                      borderRadius: BorderRadius.circular(99),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           Expanded(
             child: _matakuliah.isEmpty
                 ? const _EmptyMatakuliah()
                 : ListView.separated(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 88),
                     itemCount: _matakuliah.length,
                     separatorBuilder: (context, index) =>
                         const SizedBox(height: 12),
@@ -150,11 +130,11 @@ class _MatakuliahListScreenState extends State<MatakuliahListScreen> {
                             child: Row(
                               children: [
                                 Container(
-                                  width: 54,
-                                  height: 54,
+                                  width: 50,
+                                  height: 58,
                                   decoration: BoxDecoration(
                                     color: yellow,
-                                    borderRadius: BorderRadius.circular(14),
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -190,20 +170,19 @@ class _MatakuliahListScreenState extends State<MatakuliahListScreen> {
                                         overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(
                                           color: darkText,
-                                          fontSize: 16,
+                                          fontSize: 17,
                                           fontWeight: FontWeight.w800,
                                         ),
                                       ),
-                                      const SizedBox(height: 6),
-                                      Wrap(
-                                        spacing: 8,
-                                        runSpacing: 6,
+                                      const SizedBox(height: 8),
+                                      Row(
                                         children: [
                                           _InfoChip(
                                             icon: Icons.tag,
                                             label: matakuliah.kodeMatakuliah,
                                             color: blue,
                                           ),
+                                          const SizedBox(width: 8),
                                           _InfoChip(
                                             icon: Icons.category,
                                             label: matakuliah.jenisMatakuliah,
@@ -214,12 +193,16 @@ class _MatakuliahListScreenState extends State<MatakuliahListScreen> {
                                     ],
                                   ),
                                 ),
-                                IconButton(
-                                  icon: const Icon(Icons.delete_outline),
-                                  color: red,
-                                  tooltip: 'Hapus',
-                                  onPressed: () =>
-                                      _deleteMatakuliah(matakuliah.id!),
+                                SizedBox(
+                                  width: 42,
+                                  height: 42,
+                                  child: IconButton(
+                                    icon: const Icon(Icons.delete_outline),
+                                    color: red,
+                                    tooltip: 'Hapus',
+                                    onPressed: () =>
+                                        _deleteMatakuliah(matakuliah.id!),
+                                  ),
                                 ),
                               ],
                             ),
@@ -256,10 +239,11 @@ class _InfoChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
+      height: 32,
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.09),
-        borderRadius: BorderRadius.circular(99),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
