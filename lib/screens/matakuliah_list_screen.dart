@@ -47,7 +47,7 @@ class _MatakuliahListScreenState extends State<MatakuliahListScreen> {
         children: [
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.fromLTRB(20, 18, 20, 22),
+            padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
             decoration: const BoxDecoration(
               color: blue,
               borderRadius: BorderRadius.only(
@@ -58,31 +58,67 @@ class _MatakuliahListScreenState extends State<MatakuliahListScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: yellow,
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      child: const Icon(
+                        Icons.school,
+                        color: darkText,
+                        size: 28,
+                      ),
+                    ),
+                    const SizedBox(width: 14),
+                    const Expanded(
+                      child: Text(
+                        'Kelola Data Kuliah',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 21,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 14),
                 Container(
-                  width: 92,
-                  height: 7,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
                   decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.14),
                     borderRadius: BorderRadius.circular(99),
-                    gradient: const LinearGradient(
-                      colors: [red, yellow, Colors.white],
+                    border: Border.all(
+                      color: Colors.white.withValues(alpha: 0.22),
                     ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  'Kelola Data Kuliah',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  '${_matakuliah.length} matakuliah tersimpan',
-                  style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.82),
-                    fontSize: 14,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(
+                        Icons.library_books,
+                        color: Colors.white,
+                        size: 16,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        '${_matakuliah.length} matakuliah tersimpan',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
