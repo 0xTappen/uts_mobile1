@@ -72,50 +72,108 @@ class _MatakuliahFormScreenState extends State<MatakuliahFormScreen> {
 
   @override
   Widget build(BuildContext context) {
+    const red = Color(0xFFC62828);
+    const yellow = Color(0xFFFFD54F);
+    const blue = Color(0xFF1565C0);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(isEditing ? 'Edit Matakuliah' : 'Tambah Matakuliah'),
       ),
-      body: Padding(
+      body: ListView(
         padding: const EdgeInsets.all(16),
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            children: [
-              TextFormField(
-                controller: _kodeCtrl,
-                decoration: const InputDecoration(labelText: 'Kode Matakuliah'),
-                validator: _required,
-              ),
-              const SizedBox(height: 12),
-              TextFormField(
-                controller: _namaCtrl,
-                decoration: const InputDecoration(labelText: 'Nama Matakuliah'),
-                validator: _required,
-              ),
-              const SizedBox(height: 12),
-              TextFormField(
-                controller: _sksCtrl,
-                decoration: const InputDecoration(labelText: 'SKS'),
-                keyboardType: TextInputType.number,
-                validator: _required,
-              ),
-              const SizedBox(height: 12),
-              TextFormField(
-                controller: _jenisCtrl,
-                decoration: const InputDecoration(
-                  labelText: 'Jenis Matakuliah',
+        children: [
+          Container(
+            padding: const EdgeInsets.all(18),
+            decoration: BoxDecoration(
+              color: blue,
+              borderRadius: BorderRadius.circular(18),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: yellow,
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  child: Icon(
+                    isEditing ? Icons.edit_note : Icons.playlist_add,
+                    color: blue,
+                  ),
                 ),
-                validator: _required,
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _saveMatakuliah,
-                child: Text(isEditing ? 'Update' : 'Simpan'),
-              ),
-            ],
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Text(
+                    isEditing
+                        ? 'Perbarui informasi matakuliah'
+                        : 'Masukkan data matakuliah baru',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
+          const SizedBox(height: 18),
+          Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: _kodeCtrl,
+                  decoration: const InputDecoration(
+                    labelText: 'Kode Matakuliah',
+                    prefixIcon: Icon(Icons.tag),
+                  ),
+                  textInputAction: TextInputAction.next,
+                  validator: _required,
+                ),
+                const SizedBox(height: 12),
+                TextFormField(
+                  controller: _namaCtrl,
+                  decoration: const InputDecoration(
+                    labelText: 'Nama Matakuliah',
+                    prefixIcon: Icon(Icons.menu_book),
+                  ),
+                  textInputAction: TextInputAction.next,
+                  validator: _required,
+                ),
+                const SizedBox(height: 12),
+                TextFormField(
+                  controller: _sksCtrl,
+                  decoration: const InputDecoration(
+                    labelText: 'SKS',
+                    prefixIcon: Icon(Icons.numbers),
+                  ),
+                  keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.next,
+                  validator: _required,
+                ),
+                const SizedBox(height: 12),
+                TextFormField(
+                  controller: _jenisCtrl,
+                  decoration: const InputDecoration(
+                    labelText: 'Jenis Matakuliah',
+                    prefixIcon: Icon(Icons.category),
+                  ),
+                  validator: _required,
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton.icon(
+                  onPressed: _saveMatakuliah,
+                  icon: Icon(isEditing ? Icons.check_circle : Icons.save),
+                  label: Text(isEditing ? 'Update Data' : 'Simpan Data'),
+                  style: ElevatedButton.styleFrom(backgroundColor: red),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
